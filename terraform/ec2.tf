@@ -13,15 +13,15 @@ data "aws_ami" "ubuntu" {
   }
 }
 
-resource "aws_key_pair" "monitoring_key" {
-  key_name   = var.key_name
-  public_key = file(var.public_key_path)
+# resource "aws_key_pair" "monitoring_key" {
+#   key_name   = var.key_name
+#   public_key = file(var.public_key_path)
 
-  tags = {
-    Name        = var.key_name
-    Environment = var.environment
-  }
-}
+#   tags = {
+#     Name        = var.key_name
+#     Environment = var.environment
+#   }
+# }
 
 resource "aws_instance" "app" {
   ami                         = data.aws_ami.ubuntu.id

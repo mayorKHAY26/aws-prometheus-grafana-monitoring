@@ -12,4 +12,3 @@ instance_type = "t3.micro"
 my_ip = "70.186.199.125/32"
 
 key_name        = "monitoring-key"
-public_key_path = "~/.ssh/monitoring-key.pub"
