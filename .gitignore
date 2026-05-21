@@ -7,7 +7,7 @@ crash.log
 crash.*.log
 *.tfvars.backup
 *.auto.tfvars
-terraform.tfvars
+**/terraform.tfvars
 override.tf
 override.tf.json
 *_override.tf
