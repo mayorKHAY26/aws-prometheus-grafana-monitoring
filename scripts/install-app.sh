@@ -12,14 +12,18 @@ usermod -aG docker ubuntu
 
 # Run a simple NGINX app container
 docker rm -f app-nginx || true
+
 docker run -d \
   --name app-nginx \
   --restart unless-stopped \
   -p 80:80 \
   nginx:latest
 
+# Wait for container to fully start
+sleep 10
+
 # Create custom homepage inside the container
-docker exec app-nginx /bin/sh -c "cat > /usr/share/nginx/html/index.html" <<'EOF'
+docker exec app-nginx sh -c 'cat > /usr/share/nginx/html/index.html <<EOF
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,20 +31,25 @@ docker exec app-nginx /bin/sh -c "cat > /usr/share/nginx/html/index.html" <<'EOF
 </head>
 <body>
   <h1>AWS Monitoring Project</h1>
-  <p>This app server was deployed with Terraform.</p>
-  <p>Monitoring: Prometheus + Grafana + Node Exporter</p>
+  <p>App server is running successfully.</p>
+  <p>Deployed with Terraform, Docker, Prometheus, and Grafana.</p>
 </body>
 </html>
-EOF
+EOF'
 
 # Install Node Exporter
 cd /tmp
+
 NODE_EXPORTER_VERSION="1.8.2"
-wget -q https://github.com/prometheus/node_exporter/releases/download/v${NODE_EXPORTER_VERSION}/node_exporter-${NODE_EXPORTER_VERSION}.linux-amd64.tar.gz
-tar xvf node_exporter-${NODE_EXPORTER_VERSION}.linux-amd64.tar.gz
-cp node_exporter-${NODE_EXPORTER_VERSION}.linux-amd64/node_exporter /usr/local/bin/
+
+wget -q https://github.com/prometheus/node_exporter/releases/download/v$NODE_EXPORTER_VERSION/node_exporter-$NODE_EXPORTER_VERSION.linux-amd64.tar.gz
+
+tar xvf node_exporter-$NODE_EXPORTER_VERSION.linux-amd64.tar.gz
+
+cp node_exporter-$NODE_EXPORTER_VERSION.linux-amd64/node_exporter /usr/local/bin/
 
 useradd --no-create-home --shell /usr/sbin/nologin node_exporter || true
+
 chown node_exporter:node_exporter /usr/local/bin/node_exporter
 
 cat > /etc/systemd/system/node_exporter.service <<'EOF'

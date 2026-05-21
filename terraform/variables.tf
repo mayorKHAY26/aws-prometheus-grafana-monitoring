@@ -80,3 +80,8 @@ variable "backend_lock_table_name" {
   type        = string
   default     = "monitoring-terraform-locks"
 }
+
+variable "key_name" {
+  description = "AWS key pair name"
+  type        = string
+}

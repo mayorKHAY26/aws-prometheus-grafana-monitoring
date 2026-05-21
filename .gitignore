@@ -1,23 +1,28 @@
 # Terraform
-.terraform/
+**/.terraform/*
 *.tfstate
 *.tfstate.*
 .terraform.lock.hcl
 crash.log
 crash.*.log
 *.tfvars.backup
+*.auto.tfvars
+terraform.tfvars
 override.tf
 override.tf.json
 *_override.tf
 *_override.tf.json
 
-# SSH keys
+# SSH / generated keys
 *.pem
 *.key
 id_rsa
 id_rsa.pub
+monitoring-key
+monitoring-key.pub
 
-# OS/Editor
+# OS / Editor
 .DS_Store
+Thumbs.db
 .vscode/
 .idea/

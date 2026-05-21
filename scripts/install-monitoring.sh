@@ -13,9 +13,9 @@ usermod -aG docker ubuntu
 # Install Node Exporter on monitoring server
 cd /tmp
 NODE_EXPORTER_VERSION="1.8.2"
-wget -q https://github.com/prometheus/node_exporter/releases/download/v${NODE_EXPORTER_VERSION}/node_exporter-${NODE_EXPORTER_VERSION}.linux-amd64.tar.gz
-tar xvf node_exporter-${NODE_EXPORTER_VERSION}.linux-amd64.tar.gz
-cp node_exporter-${NODE_EXPORTER_VERSION}.linux-amd64/node_exporter /usr/local/bin/
+wget -q https://github.com/prometheus/node_exporter/releases/download/v$NODE_EXPORTER_VERSION/node_exporter-$NODE_EXPORTER_VERSION.linux-amd64.tar.gz
+tar xvf node_exporter-$NODE_EXPORTER_VERSION.linux-amd64.tar.gz
+cp node_exporter-$NODE_EXPORTER_VERSION.linux-amd64/node_exporter /usr/local/bin/
 
 useradd --no-create-home --shell /usr/sbin/nologin node_exporter || true
 chown node_exporter:node_exporter /usr/local/bin/node_exporter
@@ -46,13 +46,13 @@ useradd --no-create-home --shell /usr/sbin/nologin prometheus || true
 mkdir -p /etc/prometheus /var/lib/prometheus
 
 cd /tmp
-wget -q https://github.com/prometheus/prometheus/releases/download/v${PROM_VERSION}/prometheus-${PROM_VERSION}.linux-amd64.tar.gz
-tar xvf prometheus-${PROM_VERSION}.linux-amd64.tar.gz
+wget -q https://github.com/prometheus/prometheus/releases/download/v$PROM_VERSION/prometheus-$PROM_VERSION.linux-amd64.tar.gz
+tar xvf prometheus-$PROM_VERSION.linux-amd64.tar.gz
 
-cp prometheus-${PROM_VERSION}.linux-amd64/prometheus /usr/local/bin/
-cp prometheus-${PROM_VERSION}.linux-amd64/promtool /usr/local/bin/
-cp -r prometheus-${PROM_VERSION}.linux-amd64/consoles /etc/prometheus
-cp -r prometheus-${PROM_VERSION}.linux-amd64/console_libraries /etc/prometheus
+cp prometheus-$PROM_VERSION.linux-amd64/prometheus /usr/local/bin/
+cp prometheus-$PROM_VERSION.linux-amd64/promtool /usr/local/bin/
+cp -r prometheus-$PROM_VERSION.linux-amd64/consoles /etc/prometheus
+cp -r prometheus-$PROM_VERSION.linux-amd64/console_libraries /etc/prometheus
 
 cat > /etc/prometheus/prometheus.yml <<EOF
 global:
